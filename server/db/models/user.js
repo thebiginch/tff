@@ -2,8 +2,6 @@
 var crypto = require('crypto');
 var _ = require('lodash');
 var Sequelize = require('sequelize');
-var curl = require('node-curl');
-
 
 module.exports = function(db) {
 
@@ -101,9 +99,6 @@ module.exports = function(db) {
                     user.password = user.Model.encryptPassword(user.password, user.salt);
                 }
             },
-            beforeCreate: function(user){
-                user.image = `https://randomuser.me/api/portraits/women/${Math.floor(Math.random()*100)}.jpg'`
-            }
         },
     });
 };

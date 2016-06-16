@@ -34,7 +34,7 @@ function randPhoto () {
 
 function randUser () {
 
-  let year = chance.year({min:1952, max: 1997});
+  var year = chance.year({min:1952, max: 1997});
 
   return User.build({
     name: [chance.first(), chance.last()].join(' '),
@@ -52,6 +52,10 @@ function randUser () {
 }
 
 function generateUsers () {
+
+    var year = chance.year({min:1952, max: 1997});
+
+
   var users = doTimes(numUsers, randUser);
   users.push(User.build({
     name: 'Zach',

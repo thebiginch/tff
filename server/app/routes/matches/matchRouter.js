@@ -4,7 +4,7 @@ var db = require('./../../../db');
 
 var User = db.model('user');
 var MatchMaking = db.model('matchMaking');
-
+var Promise = require('sequelize').Promise;
 
 
 
@@ -21,14 +21,18 @@ router.get('/',function(req,res,next){
 
 router.post('/:userId',function(req,res,next){
 
-	MatchMaking.findOrCreate({where: {instId: req.params.userId,
-									challId: req.body.challId}})
-				.then(function(match){
-					console.log(match)
-					res.send(match);
-				})
-				.catch(next);
 
+	var chall = User.findById(parseInt(req.body.challId));
+	var inst = User.findById(parseInt(req.params.userId));
+
+	Promise.all([chall,inst])
+		.spread(function(chall,inst){
+			return inst.setChall(chall)
+		})
+		.then(function(what){
+			res.send(what);
+		})
+		.catch(next)
 });
 
 

@@ -23,4 +23,10 @@ router.get('/:userId',function(req,res,next){
 		.catch(next);
 });
 
+router.post('/', function(req,res,next){
+
+	User.create({})
+
+});
+
 module.exports = router;

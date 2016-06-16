@@ -2,12 +2,17 @@
 var crypto = require('crypto');
 var _ = require('lodash');
 var Sequelize = require('sequelize');
+var curl = require('node-curl');
+
 
 module.exports = function(db) {
 
     //var matchMaking = db.model('matchMaking');
 
     db.define('user', {
+        name:{
+            type: Sequelize.STRING
+        },
         email: {
             type: Sequelize.STRING
         },
@@ -95,6 +100,9 @@ module.exports = function(db) {
                     user.salt = user.Model.generateSalt();
                     user.password = user.Model.encryptPassword(user.password, user.salt);
                 }
+            },
+            beforeCreate: function(user){
+                user.image = `https://randomuser.me/api/portraits/women/${Math.floor(Math.random()*100)}.jpg'`
             }
         },
     });

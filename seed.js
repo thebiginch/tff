@@ -2,7 +2,7 @@ var chalk = require('chalk');
 var db = require('./server/db');
 
 var User = db.model('user');
-var MatchMaking = db.model('matchMaking');
+var matchMaking = db.model('matchMaking');
 
 var Promise = require('sequelize').Promise;
 
@@ -32,36 +32,33 @@ var users = [{email: 'z@z.com',
         maxAge: 50}]
  
 
-db.sync({})
+    // db.sync({})
+    //     .then(function(){
+    //         return matchMaking.findInstigators(1);
+    //     })
+    //     .then(function(what){
+    //         console.log(what)
+    //     })
+    //     .catch(function(err){
+    //         console.log(err);
+    //     })
+    //     .then(function (adminUser) {
+    //          console.log(chalk.green('Seed successful!'));
+    //          process.kill(0);
+    //     });
+
+
+ db.sync({})
     .then(function(){
-        MatchMaking.findChallengers(2);
+      return User.findById(1);
     })
-    .then(function(what){
-        console.log('whatttttt', what);
+    .then(function(user){
+        return user.getInst({where: {IR: true}});
     })
-    .catch(function(err){
-        console.log(err);
+    .then(function(chall){
+        console.log("challllll", chall[0])
     })
     .then(function (adminUser) {
          console.log(chalk.green('Seed successful!'));
          process.kill(0);
     });
-
-
- // db.sync({})
- //    .then(function(){
- //        users = users.map(function(tuser){
- //            return User.create(tuser);
- //        })
- //        return Promise.all(users)
- //    })
- //    .then(function(users){
- //         return users[0].getInst();
- //    })
- //    .then(function(chall){
- //        console.log("challllll", chall)
- //    })
- //    .then(function (adminUser) {
- //         console.log(chalk.green('Seed successful!'));
- //         process.kill(0);
- //    });

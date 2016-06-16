@@ -3,7 +3,11 @@
 var Sequelize = require('sequelize');
 
 
+
 module.exports = function(db) {
+
+    var User = db.model('user');
+
     db.define('matchMaking', {
         IR: {
             type: Sequelize.BOOLEAN
@@ -13,17 +17,30 @@ module.exports = function(db) {
         },
     }, {
         classMethods: {
-            findChallengers: function(userId) {
-              var User = db.model('user');
+            findInstigators: function(to) {
 
-              console.log(User)
                 return this.findAll({
                     where: {
-                        challId: userId,
-                        IR: true
+                        challId: to,
                     },
                 })
+                .then(function(inst){
+
+                    //console.log("++++++++++++++++++++",inst)
+                    var users = [];
+                    inst.forEach(id => {
+                        users.push(User.findById(id))
+                    })
+    
+
+                  return Promise.all(users);
+                })
+                .then(users => {
+                    return users;
+                });
+
             }
-        }
+        },
+       // defaultScope: {include: [{model: User, as: 'inst'}]}
     })
 };

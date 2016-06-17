@@ -1,10 +1,24 @@
 <ion-view title="Fight Tab Default Page" id="page2" class=" ">
     <ion-content padding="true" class="has-header">
-      <td-cards>
+      <ion-panel>
+        <td-cards>
+          <td-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe-left="cardSwipedLeft(card)" on-swipe-right="cardSwipedRight(card)" on-partial-swipe="cardPartialSwipe(amt)" class="card-{{$index}}">
+            <!-- <div class="image"> -->
+              <div class="no-text">FLIGHT!</div>
+              <img ng-src="{{card.image}}">
+              <div class="yes-text">FIGHT!</div>
+            <!-- </div> -->
+          </td-card>
+        </td-cards>
+      </ion-panel>
+
+
+      <!-- <td-cards>
         <td-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)">
+
           <img ng-src="{{card.image}}">
         </td-card>
-      </td-cards>
+      </td-cards> -->
 
         <!-- <div class="">
             <img src="img/TvTxmF70SounKc1nTzZG_17.jpg" width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">

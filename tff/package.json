@@ -22,5 +22,11 @@
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard"
   ],
-  "cordovaPlatforms": []
+  "cordovaPlatforms": [],
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
 }

@@ -50,7 +50,7 @@ angular.module('app.controllers', ['app.factories', 'ionic', 'fsaPreBuilt'])
     fightFactory.cardSwipedRight(otherPerson)
     .then(function(match) {
       $scope.match = match;
-      $scope.openModal()
+      if(match.name) $scope.openModal()
     })
   }
 
@@ -60,6 +60,7 @@ angular.module('app.controllers', ['app.factories', 'ionic', 'fsaPreBuilt'])
     animation: 'slide-in-up'
   }).then(function(modal) {
     $scope.modal = modal;
+    // console.log(modal.$scope)
   });
   $scope.openModal = function() {
     $scope.modal.show();

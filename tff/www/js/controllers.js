@@ -1,6 +1,6 @@
 angular.module('app.controllers', ['app.factories'])
 
-.controller('fightTabDefaultPageCtrl', function($scope, $http, figthFactory) {
+.controller('fightTabDefaultPageCtrl', function($scope, $http, fightFactory) {
   $scope.getNewCards = fightFactory.getNewCards
   $scope.getNewCards()
   $scope.cards = [];

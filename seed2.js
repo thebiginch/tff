@@ -70,6 +70,7 @@ function generateUsers () {
     minAge: chance.integer({min: 18, max: 30}),
     maxAge: chance.integer({min:31, max: 65})
   }));
+
   users.push(User.build({
     name: 'Andrew',
     image: randPhoto(),
@@ -105,12 +106,12 @@ db.sync({force: true})
   return seed();
 })
 .then(function(createdUsers){
-  var matches = []
-  for(var i = 0;i<100;i++){
-    matches.push(createdUsers[chance.integer({min:1,max:99})].setInst(createdUsers[chance.integer({min:1,max:99})]));
-  }
+  // var matches = []
+  // for(var i = 0;i<100;i++){
+  //   matches.push(createdUsers[chance.integer({min:1,max:99})].addInst(createdUsers[chance.integer({min:1,max:99})],{IR: chance.bool()}));
+  // }
 
-  return Promise.all(matches);
+  // return Promise.all(matches);
 
 })
 .then(function () {

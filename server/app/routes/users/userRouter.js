@@ -3,11 +3,10 @@ var router = require('express').Router();
 var db = require('./../../../db');
 
 var User = db.model('user');
-//var MatchMaking = db.model('matchMaking');
 
 router.get('/',function(req,res,next){
 
-	User.findAll({})
+	User.findAll({limit:30})
 		.then(function(users){
 			res.send(users);
 		})
@@ -22,6 +21,8 @@ router.get('/:userId',function(req,res,next){
 		})
 		.catch(next);
 });
+
+
 
 router.post('/', function(req,res,next){
 

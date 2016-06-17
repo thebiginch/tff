@@ -1,39 +1,103 @@
 'use strict';
 var router = require('express').Router();
 var db = require('./../../../db');
-
+var _ = require('lodash');
 var User = db.model('user');
 var MatchMaking = db.model('matchMaking');
 var Promise = require('sequelize').Promise;
 
 
 
-router.get('/',function(req,res,next){
+router.get('/', function(req, res, next) {
 
-	MatchMaking.findAll({})
-	.then(function(matches){
-
-		console.log(matches)
-		res.send(matches)
-	})
-	.catch(next);
+    MatchMaking.findAll({ where: { IR: true } })
+        .then(function(matches) {
+            res.send(matches)
+        })
+        .catch(next);
 });
 
-router.post('/:userId',function(req,res,next){
+router.post('/', function(req, res, next) {
+
+    console.log(req.body)
+
+    var theUser = User.findById(parseInt(req.body.userId));
+    var thePerson = User.findById(parseInt(req.body.personId));
+
+    var IR = !!req.body.IR;
+    var promiseForUsers = Promise.all([theUser, thePerson]);
+
+    //Search for a match where user has already been challenged by person and the pair exists in the match table
+    MatchMaking.findAll({
+            where: { instId: req.body.personId, challId: req.body.userId }
+        })
+        .then(function(match) {
+            console.log("+++++++++++++++++", match, match.length)
+
+            //then if the match doesn't exists 
+            if (match.length == 0) {
+
+                //create the match in the match table
+                return promiseForUsers.then(function(users) {
+
+                        // console.log("useerrrr", users[0])
+                        // console.log("useerrrr", users[1])
+
+                        //user is inst  and other person is chall  and send users response
+                        return users[0].addInst(users[1], { IR: IR });
+                    })
+                    .then(function(users) {
+                        //match created in db successfully
+                        res.status(204).send('match created')
+                    })
+                    .catch(next)
+
+               //if the match exists and both want to throw down its time to fight!      
+            } else if (match[0].IR && IR) {
+                
 
 
-	var chall = User.findById(parseInt(req.body.challId));
-	var inst = User.findById(parseInt(req.params.userId));
 
-	Promise.all([chall,inst])
-		.spread(function(chall,inst){
-			return inst.setChall(chall)
-		})
-		.then(function(what){
-			res.send(what);
-		})
-		.catch(next)
+            	promiseForUsers.then(users => {
+                	return users[0].addChall(users[1], { CR: IR });
+                })
+                .tap(users => {
+                	res.status(201).send(users[1]);
+                })
+                .catch(next);
+                 //may need to send other user??
+
+                //the match exists in database but fight hasnt been confirmed by user or person
+            } else {
+
+            	promiseForUsers.then(users => {
+                	users[0].addChall(users[1], { CR: IR });
+                })
+                .tap(users => {
+                	res.status(201).send(users[1]);
+                })
+                .catch(next);
+            }
+        });
 });
+
+
+
+router.get('/myMatches', function(req, res, next) {
+
+    MatchMaking.findMatches(userId)
+        .then(function(matches) {
+            //console.log(matches);
+            res.send(matches);
+        })
+        .catch(next)
+})
+
+
+
+
+
+
 
 
 module.exports = router;

@@ -1,17 +1,16 @@
-angular.module('app.controllers', [])
+angular.module('app.controllers', ['app.factories'])
 
-.controller('fightTabDefaultPageCtrl', function($scope) {
-  $scope.cards = [
-    {image: 'img/TvTxmF70SounKc1nTzZG_17.jpg'},
-    {image: 'https://randomuser.me/api/portraits/men/23.jpg' }
-  ];
+.controller('fightTabDefaultPageCtrl', function($scope, $http, figthFactory) {
+  $scope.getNewCards = fightFactory.getNewCards
+  $scope.getNewCards()
+  $scope.cards = [];
 
   $scope.cardDestroyed = function(index) {
     $scope.cards.splice(index, 1);
   };
 
   $scope.cardSwiped = function(index) {
-    var newCard = // new card data
+    var newCard; // new card data
     $scope.cards.push(newCard);
   };
 })

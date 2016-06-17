@@ -1,4 +1,11 @@
 {
   "name": "tff",
-  "app_id": ""
+  "app_id": "",
+  "proxies": [
+    {
+      "path": "/api/users",
+      "proxyUrl": "http://192.168.3.223:1337/api/users"
+    }
+  ]
+
 }

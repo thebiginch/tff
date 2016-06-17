@@ -13,20 +13,13 @@ router.get('/',function(req,res,next){
 	// 		res.send(users);
 	// 	})
 	// 	.catch(next);
-	MatchMaking.findBouts(25)
+	MatchMaking.findBouts(req.user.id)
 		.then(function(matches){
 
-			matches = matches.map(match => User.findById(match.challId))
-			return Promise.all(matches);
+			var users = matches.map(match => User.findById(match.challId))
+			return Promise.all(users);
 		})
-		.then(users => {
-			var i = users.length
-
-			users = users.concat()
-
-
-			res.send(users)
-		})
+		.then(users => res.send(users))
 		.catch(next);
 	
 

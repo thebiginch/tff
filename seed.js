@@ -30,7 +30,41 @@ var users = [{email: 'z@z.com',
         birthday: new Date("april 20, 1947 01:15:00"),
         minAge: 25,
         maxAge: 50}]
- 
+
+        var matches = [{
+         IR: true,
+         instId: 3,
+         challId: 1
+       }, {
+         IR: true,
+         instId: 2,
+         challId: 1
+       }]
+           db.sync({force: true})
+             .then(function() {
+               seedUsers = users.map(function(user) {
+                 return User.create(user)
+               })
+               return Promise.all(seedUsers)
+             })
+             .then(function(users) {
+               users[0].setInst(users[1])
+               users[0].setInst(users[2])
+            //  seedMatches = matches.map(function(match) {
+            //       return matchMaking.create(match)
+            //   })
+            //   return Promise.all(seedMatches)
+              // .then(function(matches) {
+              //  //  console.log(matches, users)
+              //  //  users[0].addInst(users[1])
+              //  //  matches[0].addInst(users[0])
+              //  //  matches[1].addInst(users[0])
+              // })
+           })
+           .then(function() {
+             console.log(chalk.green('Seed successful!'));
+                    //  process.kill(0);
+           })
 
     // db.sync({})
     //     .then(function(){
@@ -47,18 +81,18 @@ var users = [{email: 'z@z.com',
     //          process.kill(0);
     //     });
 
-
- db.sync({})
-    .then(function(){
-      return User.findById(1);
-    })
-    .then(function(user){
-        return user.getInst({where: {IR: true}});
-    })
-    .then(function(chall){
-        console.log("challllll", chall[0])
-    })
-    .then(function (adminUser) {
-         console.log(chalk.green('Seed successful!'));
-         process.kill(0);
-    });
+ //
+ // db.sync({})
+ //    .then(function(){
+ //      return User.findById(1);
+ //    })
+ //    .then(function(user){
+ //        return user.getInst({where: {IR: true}});
+ //    })
+ //    .then(function(chall){
+ //        console.log("challllll", chall[0])
+ //    })
+ //    .then(function (adminUser) {
+ //         console.log(chalk.green('Seed successful!'));
+ //         process.kill(0);
+ //    });

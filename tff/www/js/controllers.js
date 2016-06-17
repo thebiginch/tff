@@ -1,4 +1,4 @@
-angular.module('app.controllers', ['app.factories'])
+angular.module('app.controllers', ['app.factories','fsaPreBuilt'])
 
 .controller('fightTabDefaultPageCtrl', function($scope, $http, fightFactory) {
   // Commented out for testing
@@ -55,9 +55,26 @@ angular.module('app.controllers', ['app.factories'])
 
 })
 
-.controller('loginCtrl', function($scope) {
+.controller('loginCtrl', function($scope,AuthService) {
 
+    $scope.login = {};
+    $scope.error = null;
+
+    $scope.sendLogin = function (loginInfo) {
+
+        $scope.error = null;
+
+        AuthService.login(loginInfo).then(function () {
+          $state.go('tabController.fightTabDefaultPage');
+        }).catch(function () {
+            $scope.error = 'Invalid login credentials.';
+        });
+    };
 })
+
+
+
+
 
 .controller('matchesTabDefaultPageCtrl', function($scope) {
 

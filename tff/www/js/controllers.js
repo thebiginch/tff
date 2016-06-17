@@ -55,7 +55,7 @@ angular.module('app.controllers', ['app.factories','fsaPreBuilt'])
 
 })
 
-.controller('loginCtrl', function($scope,AuthService) {
+.controller('loginCtrl', function($scope,AuthService, $state) {
 
     $scope.login = {};
     $scope.error = null;
@@ -65,7 +65,7 @@ angular.module('app.controllers', ['app.factories','fsaPreBuilt'])
         $scope.error = null;
 
         AuthService.login(loginInfo).then(function () {
-          $state.go('tabController.fightTabDefaultPage');
+          $state.go('tabsController.fightTabDefaultPage');
         }).catch(function () {
             $scope.error = 'Invalid login credentials.';
         });

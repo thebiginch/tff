@@ -4,6 +4,7 @@ var db = require('./../../../db');
 
 var User = db.model('user');
 var MatchMaking = db.model('matchMaking')
+var Promise = require('sequelize').Promise
 
 router.get('/',function(req,res,next){
 
@@ -15,8 +16,16 @@ router.get('/',function(req,res,next){
 	MatchMaking.findBouts(25)
 		.then(function(matches){
 
-			
-			res.send(matches);
+			matches = matches.map(match => User.findById(match.challId))
+			return Promise.all(matches);
+		})
+		.then(users => {
+			var i = users.length
+
+			users = users.concat()
+
+
+			res.send(users)
 		})
 		.catch(next);
 	

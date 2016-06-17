@@ -27,7 +27,16 @@ module.exports = function(db) {
                             }
                         }
                     })
-                }
+                },
+                findBouts: function(userId) {
+                    return this.findAll({
+                        where: {
+                            IR: true,
+                            CR: null,
+                            challId: userId 
+                        }
+                    })
+                },
             },
         })
 }

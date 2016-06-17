@@ -21,7 +21,7 @@ router.post('/', function(req, res, next) {
 
     console.log(req.body)
 
-    var theUser = User.findById(parseInt(req.body.userId));
+    var theUser = User.findById(parseInt(req.user.id));
     var thePerson = User.findById(parseInt(req.body.personId));
 
     var IR = !!req.body.IR;
@@ -29,7 +29,7 @@ router.post('/', function(req, res, next) {
 
     //Search for a match where user has already been challenged by person and the pair exists in the match table
     MatchMaking.findAll({
-            where: { instId: req.body.personId, challId: req.body.userId }
+            where: { instId: req.body.personId, challId: req.user.id }
         })
         .then(function(match) {
             console.log("+++++++++++++++++", match, match.length)

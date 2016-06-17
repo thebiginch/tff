@@ -5,7 +5,10 @@
     {
       "path": "/api/users",
       "proxyUrl": "http://192.168.3.223:1337/api/users"
+    },
+    {
+      "path": "/api/matches",
+      "proxyUrl": "http://192.168.3.223:1337/api/matches"
     }
   ]
-
 }

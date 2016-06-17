@@ -3,8 +3,13 @@ angular.module('app.factories', [])
 .factory('fightFactory', function($http) {
   return {
     getNewCards: function() {
-      return $http.get('/api/users')
-      .then(users => $scope.cards = users.data)
+      return $http.get('/api/users').then((users) => users.data)
+    },
+    cardSwipedRight: function(otherPerson) {
+      return $http.post('/api/matches',{userId: 60, personId: otherPerson.id, IR: true}).then((resp) => resp.data)
+    },
+    cardSwipedLeft: function(otherPerson) {
+      return $http.post('/api/matches',{userId: 50, personId: otherPerson.id, IR: false}).then((resp) => resp.data)
     }
   }
 })

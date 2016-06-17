@@ -1,9 +1,38 @@
 angular.module('app.controllers', ['app.factories'])
 
 .controller('fightTabDefaultPageCtrl', function($scope, $http, fightFactory) {
-  $scope.getNewCards = fightFactory.getNewCards
+  // Commented out for testing
+  $scope.getNewCards = function() {
+    fightFactory.getNewCards().then(cards => $scope.cards = cards )
+  }
+
   $scope.getNewCards()
+
   $scope.cards = [];
+
+  // $scope.cards = [{
+  //   name: 'Zach',
+  //   image: 'https://randomuser.me/api/portraits/men/90.jpg',
+  //   email: 'z@z.com',
+  //   password: '123',
+  //   isAdmin: true,
+  //   location: 12345,
+  //   searchRadius: 50,
+  //   weight: 150,
+  //   minAge: 18,
+  //   maxAge: 65
+  // },{
+  //   name: 'Andrew',
+  //   image: 'https://randomuser.me/api/portraits/men/60.jpg',
+  //   email: 'a@a.com',
+  //   password: '123',
+  //   isAdmin: true,
+  //   location: 12345,
+  //   searchRadius: 50,
+  //   weight: 150,
+  //   minAge: 18,
+  //   maxAge: 65
+  // }]
 
   $scope.cardDestroyed = function(index) {
     $scope.cards.splice(index, 1);
@@ -13,6 +42,9 @@ angular.module('app.controllers', ['app.factories'])
     var newCard; // new card data
     $scope.cards.push(newCard);
   };
+
+  $scope.cardSwipedLeft = fightFactory.cardSwipedLeft
+  $scope.cardSwipedRight = fightFactory.cardSwipedRight
 })
 
 .controller('chatTabDefaultPageCtrl', function($scope) {

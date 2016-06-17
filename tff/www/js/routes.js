@@ -7,8 +7,8 @@ angular.module('app.routes', [])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-    
-  
+
+
 
       .state('tabsController.fightTabDefaultPage', {
     url: '/page2',
@@ -42,10 +42,14 @@ angular.module('app.routes', [])
     abstract:true
   })
 
-  .state('login', {
+  .state('tabsController.login', {
     url: '/page5',
-    templateUrl: 'templates/login.html',
-    controller: 'loginCtrl'
+    views: {
+      'tab4': {
+      templateUrl: 'templates/login.html',
+      controller: 'loginCtrl'
+      }
+    }
   })
 
   .state('tabsController.matchesTabDefaultPage', {
@@ -60,6 +64,6 @@ angular.module('app.routes', [])
 
 $urlRouterProvider.otherwise('/page1/page2')
 
-  
+
 
 });

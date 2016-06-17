@@ -1,0 +1,13 @@
+<ion-view title="Fight Tab Default Page" id="page2" class=" ">
+    <ion-content padding="true" class="has-header">
+      <td-cards>
+        <td-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)">
+          <img ng-src="{{card.image}}">
+        </td-card>
+      </td-cards>
+
+        <!-- <div class="">
+            <img src="img/TvTxmF70SounKc1nTzZG_17.jpg" width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+        </div> -->
+    </ion-content>
+</ion-view>

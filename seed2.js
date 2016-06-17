@@ -110,7 +110,7 @@ db.sync({force: true})
   // for(var i = 0;i<100;i++){
   //   matches.push(createdUsers[chance.integer({min:1,max:99})].addInst(createdUsers[chance.integer({min:1,max:99})],{IR: chance.bool()}));
   // }
-
+  return createdUsers[29].addInst(createdUsers[101],{IR:true});
   // return Promise.all(matches);
 
 })

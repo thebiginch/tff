@@ -32,8 +32,6 @@ router.post('/', function(req, res, next) {
             where: { instId: req.body.personId, challId: req.user.id }
         })
         .then(function(match) {
-            console.log("+++++++++++++++++", match, match.length)
-
             //then if the match doesn't exists
             if (match.length == 0) {
 
@@ -55,15 +53,11 @@ router.post('/', function(req, res, next) {
                //if the match exists and both want to throw down its time to fight!
             } else if (match[0].IR && IR) {
 
-
-
-
             	promiseForUsers.then(users => {
                 	return users[0].addChall(users[1], { CR: IR });
                 })
-                .tap(users => {
-                	res.status(201).send(users[1]);
-                })
+                .then( () => promiseForUsers)
+                .then(users => res.send(users[1]))
                 .catch(next);
                  //may need to send other user??
 

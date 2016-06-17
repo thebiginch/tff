@@ -10,6 +10,20 @@
             <!-- </div> -->
           </td-card>
         </td-cards>
+
+        <button class = "button" ng-click = "openModal()">Open</button>
+
+    <script id="my-modal.html" type="text/ng-template">
+      <ion-modal-view class="modal-backdrop">
+        <ion-content>
+        <h1 class="match">You found a match!</h1>
+        <button class = "button" ng-click = "closeModal()">Hide</button>
+        </ion-content>
+      </ion-modal-view>
+    </script>
+
+        <!-- <ion-popover-view>
+        </ion-popover-view> -->
       </ion-panel>
 
 

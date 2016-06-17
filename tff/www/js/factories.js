@@ -13,3 +13,13 @@ angular.module('app.factories', [])
     }
   }
 })
+.factory('loginFactory',function($http){
+
+  return {
+    login: function(username,password){
+      $http.post('/api/login',{username: us})
+
+    }
+  }
+
+})

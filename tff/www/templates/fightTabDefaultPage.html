@@ -11,12 +11,14 @@
           </td-card>
         </td-cards>
 
-        <button class = "button" ng-click = "openModal()">Open</button>
+        <!-- <button class = "button" ng-click = "openModal()">Open</button> -->
 
     <script id="my-modal.html" type="text/ng-template">
       <ion-modal-view class="modal-backdrop">
         <ion-content>
         <h1 class="match">You found a match!</h1>
+        {{match.name}}
+        <img ng-src="match.image"/>
         <button class = "button" ng-click = "closeModal()">Hide</button>
         </ion-content>
       </ion-modal-view>

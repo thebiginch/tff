@@ -1,10 +1,10 @@
-<ion-view title="Settings Tab Default Page" id="page4" class=" ">
+<ion-view title="Settings" id="page4" class=" ">
     <ion-content padding="true" class="has-header">
         <form id="settingsTabDefaultPage-form2" class="list ">
             <ion-item class="item-divider " id="settingsTabDefaultPage-list-item-divider2">Discovery Settings</ion-item>
             <ion-item id="settingsTabDefaultPage-list-item4" class="  ">Location</ion-item>
             <label class="item item-input " id="settingsTabDefaultPage-input1">
-                <input type="number" placeholder="12345">
+                <input type="number" placeholder="{{zip}}">
             </label>
             <ion-item id="settingsTabDefaultPage-list-item1" class="  ">Search Distance
                 <span class="item-note">50mi.</span>
@@ -27,8 +27,8 @@
             <ion-toggle toggle-class="toggle-positive" ng-checked="true" id="settingsTabDefaultPage-toggle2" class=" ">Discovery</ion-toggle>
             <ion-item class="item-divider " id="settingsTabDefaultPage-list-item-divider1">App Notifications</ion-item>
             <ion-toggle toggle-class="toggle-positive" ng-checked="true" id="settingsTabDefaultPage-toggle3" class=" ">Toggle Notifications</ion-toggle>
-            <button id="settingsTabDefaultPage-button1" class=" button button-positive  button-block ">Log Out</button>
-            <button id="settingsTabDefaultPage-button2" class=" button button-assertive  button-block ">Delete Account</button>
+            <button id="settingsTabDefaultPage-button1" ng-click="sendLogout()" class=" button button-positive  button-block ">Log Out</button>
+            <button id="settingsTabDefaultPage-button2" ng-click="deleteAccount()" class=" button button-assertive  button-block ">Delete Account</button>
         </form>
     </ion-content>
 </ion-view>

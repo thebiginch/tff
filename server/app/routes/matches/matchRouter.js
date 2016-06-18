@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
 
-    console.log(req.body)
+    console.log(req.user)
 
     var theUser = User.findById(parseInt(req.user.id));
     var thePerson = User.findById(parseInt(req.body.personId));
@@ -38,8 +38,8 @@ router.post('/', function(req, res, next) {
                 //create the match in the match table
                 return promiseForUsers.then(function(users) {
 
-                        // console.log("useerrrr", users[0])
-                        // console.log("useerrrr", users[1])
+                        console.log("useerrrr", users[0])
+                         console.log("useerrrr", users[1])
 
                         //user is inst  and other person is chall  and send users response
                         return users[0].addInst(users[1], { IR: IR });
@@ -50,27 +50,26 @@ router.post('/', function(req, res, next) {
                     })
                     .catch(next)
 
-               //if the match exists and both want to throw down its time to fight!
+                //if the match exists and both want to throw down its time to fight!
             } else if (match[0].IR && IR) {
 
-            	promiseForUsers.then(users => {
-                	return users[0].addChall(users[1], { CR: IR });
-                })
-                .then( () => promiseForUsers)
-                .then(users => res.send(users[1]))
-                .catch(next);
-                 //may need to send other user??
+                promiseForUsers.then(users => {
+                        return users[0].addInst(users[1], { CR: IR });
+                    })
+                    .then(() => promiseForUsers)
+                    .then(users => res.send(users[1]))
+                    .catch(next);
+                //may need to send other user??
 
                 //the match exists in database but fight hasnt been confirmed by user or person
             } else {
 
-            	promiseForUsers.then(users => {
-                	users[0].addChall(users[1], { CR: IR });
-                })
-                .tap(users => {
-                	res.status(201).send(users[1]);
-                })
-                .catch(next);
+                promiseForUsers.then(users => {
+                        users[0].addChall(users[1], { CR: IR });
+                    })
+                    .then(() => promiseForUsers)
+                    .then(users => res.send(users[1]))
+                    .catch(next);
             }
         });
 });

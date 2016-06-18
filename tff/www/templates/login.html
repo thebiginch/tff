@@ -1,4 +1,4 @@
-<ion-view title="Login" id="page5" class=" ">
+<ion-view title="Tinder for Fighting" id="page1" class=" ">
     <ion-content padding="true" class="has-header">
         <form ng-submit="sendLogin(login)" id="login-form4" class="list ">
             <ion-list id="login-list1" class=" ">
@@ -14,7 +14,7 @@
             <div class="spacer" style="height: 40px;"></div>
             <button id="login-button4"  type="submit" class=" button button-stable  button-block ">Log in
             </button>
-           <!--  <a href="#" onclick="window.open('/signup', '_system', 'location=yes'); return false;" id="login-button5" class=" button button-positive  button-block button-clear ">Or create an account</a> -->
+            <a href="#" ng-click="authFB()" id="login-button5" class=" button button-positive  button-block button-clear ">Or login up with Facebook</a>
         </form>
     </ion-content>
 </ion-view>

@@ -108,9 +108,13 @@ db.sync({force: true})
 .then(function(createdUsers){
   // var matches = []
   // for(var i = 0;i<100;i++){
-  //   matches.push(createdUsers[chance.integer({min:1,max:99})].addInst(createdUsers[chance.integer({min:1,max:99})],{IR: chance.bool()}));
+  //   matches.push(createdUsers[chance.integer({min:1,max:30})].addInst(createdUsers[chance.integer({min:1,max:99})],{IR: chance.bool()}));
   // }
-  return createdUsers[29].addInst(createdUsers[101],{IR:true});
+  return Promise.all([createdUsers[29].addInst(createdUsers[101],{IR:true}),
+          createdUsers[27].addInst(createdUsers[101],{IR:true}),
+          createdUsers[25].addInst(createdUsers[101],{IR:true}),
+          createdUsers[23].addInst(createdUsers[101],{IR:true}),
+          createdUsers[22].addInst(createdUsers[101],{IR:true})]);
   // return Promise.all(matches);
 
 })

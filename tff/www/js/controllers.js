@@ -1,13 +1,13 @@
 angular.module('app.controllers', ['app.factories', 'ionic', 'fsaPreBuilt'])
 
 .controller('fightTabDefaultPageCtrl', function($scope, $http, fightFactory, $ionicModal) {
-  // // Commented out for testing
+  // Commented out for testing
   $scope.getNewCards = function() {
     fightFactory.getNewCards().then(cards => $scope.cards = cards )
   }
-
-  $scope.getNewCards()
-
+  
+  $scope.getNewCards();
+  
   $scope.cards = [];
 
   // $scope.cards = [{
@@ -86,14 +86,35 @@ angular.module('app.controllers', ['app.factories', 'ionic', 'fsaPreBuilt'])
 
 })
 
-.controller('settingsTabDefaultPageCtrl', function($scope) {
 
+.controller('settingsTabDefaultPageCtrl', function($scope,$http,AuthService,$state) {
+
+
+  $scope.sendLogout = function () {
+
+        $scope.error = null;
+
+        AuthService.logout().then(function () {
+          $state.go('login');
+        }).catch(function () {
+            $scope.error = 'Something bad.';
+        });
+    };
+
+  $scope.deleteAccount = function () {
+
+        $scope.error = null;
+
+        $http.delete('/api/users').then(function () {
+          $state.go('login');
+        }).catch(function () {
+            $scope.error = 'Something bad.';
+        });
+    };
 })
 
-.controller('loginCtrl', function($scope,AuthService, $state) {
+.controller('loginCtrl', function($scope,AuthService,$state) {
 
-    $scope.login = {};
-    $scope.error = null;
 
     $scope.sendLogin = function (loginInfo) {
 
@@ -104,6 +125,11 @@ angular.module('app.controllers', ['app.factories', 'ionic', 'fsaPreBuilt'])
         }).catch(function () {
             $scope.error = 'Invalid login credentials.';
         });
+
+    $scope.authFB = function(){
+        
+    }
+
     };
 })
 

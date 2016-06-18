@@ -1,4 +1,4 @@
-angular.module('app.controllers', ['app.factories', 'ionic', 'fsaPreBuilt'])
+angular.module('app.controllers', ['app.factories', 'ionic', 'fsaPreBuilt', 'app.services'])
 
 .controller('fightTabDefaultPageCtrl', function($scope, $http, fightFactory, $ionicModal) {
     // // Commented out for testing
@@ -86,7 +86,7 @@ angular.module('app.controllers', ['app.factories', 'ionic', 'fsaPreBuilt'])
 
 })
 
-.controller('settingsTabDefaultPageCtrl', function($scope, $state, AuthService, $localStorage) {
+.controller('settingsTabDefaultPageCtrl', function($scope, $state, AuthService, $localStorage,config) {
 
 
     $scope.user = $localStorage.user;
@@ -124,7 +124,7 @@ angular.module('app.controllers', ['app.factories', 'ionic', 'fsaPreBuilt'])
 
         $scope.error = null;
 
-        $http.delete('/api/users').then(function() {
+        $http.delete(config.apiUrl+'/api/users').then(function() {
             $state.go('login');
         }).catch(function() {
             $scope.error = 'Something bad.';

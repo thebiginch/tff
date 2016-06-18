@@ -90,7 +90,7 @@ angular.module('app.controllers', ['app.factories', 'ionic', 'fsaPreBuilt'])
 
 })
 
-.controller('loginCtrl', function($scope,AuthService, $state) {
+.controller('loginCtrl', function($scope,AuthService, $state, $http) {
 
     $scope.login = {};
     $scope.error = null;
@@ -103,6 +103,28 @@ angular.module('app.controllers', ['app.factories', 'ionic', 'fsaPreBuilt'])
           $state.go('tabsController.fightTabDefaultPage');
         }).catch(function () {
             $scope.error = 'Invalid login credentials.';
+        });
+    };
+
+    $scope.sendLogout = function () {
+
+        $scope.error = null;
+
+        AuthService.logout().then(function () {
+          $state.go('login');
+        }).catch(function () {
+            $scope.error = 'Something bad.';
+        });
+    };
+
+  $scope.deleteAccount = function () {
+
+        $scope.error = null;
+
+        $http.delete('/api/users').then(function () {
+          $state.go('login');
+        }).catch(function () {
+            $scope.error = 'Something bad.';
         });
     };
 })

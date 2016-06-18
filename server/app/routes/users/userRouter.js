@@ -20,7 +20,6 @@ router.get('/challengers', function(req, res, next) {
 	var theUsers = []
 	req.user.getChall()
 	.then(users => {
-		// console.log(users[0].matchMaking.CR)
 		matches = users.map((user) => user.id)
 		theUsers = users.filter((user) => user.matchMaking.CR === null)
 		dataLimit -= theUsers.length
@@ -42,9 +41,6 @@ router.get('/challengers', function(req, res, next) {
 				limit: dataLimit
 			})
 			.then(users => {
-				// _.uniqBy(users, function (e) {
-				//   return e.id;
-				// });
 				theUsers = users.concat(theUsers)
 			})
 		}
@@ -54,6 +50,26 @@ router.get('/challengers', function(req, res, next) {
 	})
 	.catch(next);
 })
+
+router.get('/matches', function(req, res, next) {
+	// var matches = []
+	var theUsers = []
+	req.user.getChall()
+	.then(users => {
+		// matches = users.map((user) => user.id)
+		theUsers = users.filter((user) => user.matchMaking.CR === true)
+	})
+	.then(() => {
+		return req.user.getInst()
+	})
+	.then((insts) => {
+		//matches = matches.concat(insts.map((inst) => inst.id))
+		var moreUsers = insts.filter((inst) => inst.matchMaking.CR === true)
+		theUsers = theUsers.concat(moreUsers)
+		res.send(theUsers)
+	})
+})
+
 
 router.get('/',function(req,res,next){
 

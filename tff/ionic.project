@@ -3,20 +3,8 @@
   "app_id": "",
   "proxies": [
     {
-      "path": "/api/users",
-      "proxyUrl": "http://127.0.0.1:1337/api/users"
-    },
-    {
-      "path": "/api/matches",
-      "proxyUrl": "http://127.0.0.1:1337/api/matches"
-    },
-    {
-      "path": "/login",
-      "proxyUrl": "http://127.0.0.1:1337/login"
-    },
-    {
-      "path": "/logout",
-      "proxyUrl": "http://127.0.0.1:1337/logout"
+      "path": "/",
+      "proxyUrl": "http://127.0.0.1:1337/"
     }
   ]
 }

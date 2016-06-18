@@ -3,7 +3,7 @@ angular.module('app.factories', ['ionic'])
 .factory('fightFactory', function($http, $ionicPopover) {
   return {
     getNewCards: function() {
-      return $http.get('/api/users').then((users) => users.data)
+      return $http.get('/api/users/challengers').then((users) => users.data)
     },
     cardSwipedRight: function(otherPerson) {
       return $http.post('/api/matches',{personId: otherPerson.id, IR: true})

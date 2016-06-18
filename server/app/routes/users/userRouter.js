@@ -4,22 +4,31 @@ var db = require('./../../../db');
 
 var User = db.model('user');
 var MatchMaking = db.model('matchMaking')
+
 var Promise = require('sequelize').Promise
+var ensureAuthenticated = function (req, res, next) {
+    if (req.isAuthenticated()) {
+        next();
+    } else {
+        res.status(401).end();
+    }
+};
+
 
 router.get('/',function(req,res,next){
 
-	// User.findAll({limit:30})
-	// 	.then(function(users){
-	// 		res.send(users);
-	// 	})
-	// 	.catch(next);
-	MatchMaking.findBouts(req.user.id)
+	
+	MatchMaking.findBouts(102)
 		.then(function(matches){
 
-			var users = matches.map(match => User.findById(match.challId))
+			var users = matches.map(match => User.findById(match.instId))
 			return Promise.all(users);
 		})
-		.then(users => res.send(users))
+		.then(users =>{
+
+
+
+		})
 		.catch(next);
 	
 
@@ -28,17 +37,36 @@ router.get('/',function(req,res,next){
 router.get('/:userId',function(req,res,next){
 
 	User.findById(req.params.userId)
-		.then(function(users){
-			res.send(users);
+		.then(function(user){
+			res.send(user);
 		})
 		.catch(next);
 });
 
+router.get('/:userId/settings',function(req,res,next){
+
+	User.findById(req.params.userId)
+	.then(user =>{
+
+
+	});
+
+})
 
 
 router.post('/', function(req,res,next){
 
-	User.create({})
+	MatchMaking.findUsers(102)
+	.then(users => res.send(users))
+
+});
+
+router.delete('/',ensureAuthenticated, function(req,res,next){
+
+	User.findById(req.user.id)
+		.then(user=>user.destroy())
+		.then(()=>res.status(204).send('deleted successfully'))
+		.catch(next);
 
 });
 

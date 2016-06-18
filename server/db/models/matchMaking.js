@@ -37,6 +37,9 @@ module.exports = function(db) {
                         }
                     })
                 },
+                findUsers: function(){
+                
+                },
             },
         })
 }

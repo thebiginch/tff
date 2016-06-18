@@ -5,8 +5,6 @@ var Sequelize = require('sequelize');
 
 module.exports = function(db) {
 
-    //var matchMaking = db.model('matchMaking');
-
     db.define('user', {
         name:{
             type: Sequelize.STRING
@@ -79,7 +77,7 @@ module.exports = function(db) {
             },
             correctPassword: function(candidatePassword) {
                 return this.Model.encryptPassword(candidatePassword, this.salt) === this.password;
-            }
+            },
         },
         classMethods: {
             generateSalt: function() {

@@ -158,10 +158,6 @@ angular.module('app.controllers', ['app.factories', 'ionic', 'fsaPreBuilt'])
 
 })
 
-
-
-
-
-.controller('matchesTabDefaultPageCtrl', function($scope) {
-
+.controller('matchesTabDefaultPageCtrl', function($scope, matchedUsers) {
+  $scope.matchedUsers = matchedUsers
 })

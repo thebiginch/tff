@@ -32,9 +32,15 @@ angular.module('app.routes', [])
            views: {
                'tab2': {
                    templateUrl: 'templates/matchesTabDefaultPage.html',
-                   controller: 'matchesTabDefaultPageCtrl'
+                   controller: 'matchesTabDefaultPageCtrl',
+                   resolve: {
+                     matchedUsers: function($http) {
+                       return $http.get('/api/users/matches')
+                       .then(matches => matches.data)
+                       }
+                     }
+                   }
                }
-           }
        })
        .state('tabsController.settingsTabDefaultPage', {
            url: '/page5',

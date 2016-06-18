@@ -14,6 +14,7 @@ var ensureAuthenticated = function (req, res, next) {
 };
 
 router.get('/challengers', function(req, res, next) {
+
 	var dataLimit = 30
 	var matches = []
 	var theUsers = []
@@ -23,6 +24,12 @@ router.get('/challengers', function(req, res, next) {
 		matches = users.map((user) => user.id)
 		theUsers = users.filter((user) => user.matchMaking.CR === null)
 		dataLimit -= theUsers.length
+	})
+	.then(() => {
+		return req.user.getInst()
+	})
+	.then((insts) => {
+		matches = matches.concat(insts.map((inst) => inst.id))
 	})
 	.then(() => {
 		if (dataLimit > 0) {

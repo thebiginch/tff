@@ -1,4 +1,4 @@
-<ion-view title="Fight Tab Default Page" id="page2" class=" ">
+<ion-view title="Fight" id="page3" class=" ">
     <ion-content padding="true" class="has-header">
       <ion-panel>
         <td-cards>
@@ -16,9 +16,14 @@
     <script id="my-modal.html" type="text/ng-template">
       <ion-modal-view class="modal-backdrop">
         <ion-content>
-        <h1 class="match">You found a match!</h1>
-        {{match.name}}
-        <img ng-src="match.image"/>
+        <h1 class="match">Time to FIGHT!</h1><img ng-src="{{match.image}}"></img>
+        <br/>
+        Name: {{match.name}}
+        <br/>
+        Weight: {{match.weight}} lbs.
+        <br/>
+        Location: {{match.location}}
+        <br/>
         <button class = "button" ng-click = "closeModal()">Hide</button>
         </ion-content>
       </ion-modal-view>

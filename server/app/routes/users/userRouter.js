@@ -2,6 +2,7 @@
 var router = require('express').Router();
 var db = require('./../../../db');
 
+
 var User = db.model('user')
 
 var ensureAuthenticated = function (req, res, next) {
@@ -11,6 +12,41 @@ var ensureAuthenticated = function (req, res, next) {
 	   res.status(401).end();
 	}
 };
+
+router.get('/challengers', function(req, res, next) {
+	var dataLimit = 30
+	var matches = []
+	var theUsers = []
+	req.user.getChall()
+	.then(users => {
+		// console.log(users[0].matchMaking.CR)
+		matches = users.map((user) => user.id)
+		theUsers = users.filter((user) => user.matchMaking.CR === null)
+		dataLimit -= theUsers.length
+	})
+	.then(() => {
+		if (dataLimit > 0) {
+			return User.findAll({
+				where:{
+					id: {
+						$notIn: matches
+					}
+				},
+				limit: dataLimit
+			})
+			.then(users => {
+				// _.uniqBy(users, function (e) {
+				//   return e.id;
+				// });
+				theUsers = users.concat(theUsers)
+			})
+		}
+	})
+	.then(function(){
+		res.send(theUsers);
+	})
+	.catch(next);
+})
 
 router.get('/',function(req,res,next){
 

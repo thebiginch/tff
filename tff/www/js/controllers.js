@@ -125,6 +125,11 @@ angular.module('app.controllers', ['app.factories', 'ionic', 'fsaPreBuilt'])
         }).catch(function () {
             $scope.error = 'Invalid login credentials.';
         });
+
+    $scope.authFB = function(){
+        
+    }
+
     };
 })
 

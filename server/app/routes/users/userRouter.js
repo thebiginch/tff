@@ -17,8 +17,8 @@ var ensureAuthenticated = function (req, res, next) {
 
 router.get('/',function(req,res,next){
 
-	
-	MatchMaking.findBouts(102)
+	req.user.id = 102
+	MatchMaking.findBouts(req.user.id)
 		.then(function(matches){
 
 			var users = matches.map(match => User.findById(match.instId))
@@ -26,7 +26,7 @@ router.get('/',function(req,res,next){
 		})
 		.then(users =>{
 
-
+			res.send(users)
 
 		})
 		.catch(next);
@@ -50,10 +50,9 @@ router.get('/:userId/settings',function(req,res,next){
 
 
 	});
-
 })
 
-
+//route for testing 
 router.post('/', function(req,res,next){
 
 	MatchMaking.findUsers(102)

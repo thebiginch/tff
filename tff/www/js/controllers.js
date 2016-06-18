@@ -86,11 +86,32 @@ angular.module('app.controllers', ['app.factories', 'ionic', 'fsaPreBuilt'])
 
 })
 
-.controller('settingsTabDefaultPageCtrl', function($scope) {
+.controller('settingsTabDefaultPageCtrl', function($scope, $state, AuthService, $http) {
+  $scope.sendLogout = function () {
+
+      $scope.error = null;
+
+      AuthService.logout().then(function () {
+        $state.go('login');
+      }).catch(function () {
+          $scope.error = 'Something bad.';
+      });
+  };
+
+  $scope.deleteAccount = function () {
+
+      $scope.error = null;
+
+      $http.delete('/api/users').then(function () {
+        $state.go('login');
+      }).catch(function () {
+          $scope.error = 'Something bad.';
+      });
+  };
 
 })
 
-.controller('loginCtrl', function($scope,AuthService, $state, $http) {
+.controller('loginCtrl', function($scope, AuthService, $state, $http) {
 
     $scope.login = {};
     $scope.error = null;
@@ -106,27 +127,7 @@ angular.module('app.controllers', ['app.factories', 'ionic', 'fsaPreBuilt'])
         });
     };
 
-    $scope.sendLogout = function () {
 
-        $scope.error = null;
-
-        AuthService.logout().then(function () {
-          $state.go('login');
-        }).catch(function () {
-            $scope.error = 'Something bad.';
-        });
-    };
-
-  $scope.deleteAccount = function () {
-
-        $scope.error = null;
-
-        $http.delete('/api/users').then(function () {
-          $state.go('login');
-        }).catch(function () {
-            $scope.error = 'Something bad.';
-        });
-    };
 })
 
 

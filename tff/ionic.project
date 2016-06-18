@@ -17,6 +17,10 @@
     {
       "path": "/logout",
       "proxyUrl": "http://127.0.0.1:1337/logout"
+    },
+    {
+      "path": "/session",
+      "proxyUrl": "http://127.0.0.1:1337/session"
     }
   ]
 }

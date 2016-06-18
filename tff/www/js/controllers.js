@@ -117,7 +117,6 @@ angular.module('app.controllers', ['app.factories', 'ionic', 'fsaPreBuilt'])
     $scope.error = null;
 
     $scope.sendLogin = function (loginInfo) {
-
         $scope.error = null;
 
         AuthService.login(loginInfo).then(function () {

@@ -3,8 +3,28 @@
   "app_id": "",
   "proxies": [
     {
-      "path": "/",
-      "proxyUrl": "http://127.0.0.1:1337/"
+      "path": "/api/users/challengers",
+      "proxyUrl": "http://192.168.3.223:1337/api/users/challengers"
+    },
+    {
+      "path": "/api/users",
+      "proxyUrl": "http://192.168.3.223:1337/api/users"
+    },
+    {
+      "path": "/api/matches",
+      "proxyUrl": "http://192.168.3.223:1337/api/matches"
+    },
+    {
+      "path": "/login",
+      "proxyUrl": "http://192.168.3.223:1337/login"
+    },
+    {
+      "path": "/logout",
+      "proxyUrl": "http://192.168.3.223:1337/logout"
+    },
+    {
+      "path": "/session",
+      "proxyUrl": "http://192.168.3.223:1337/session"
     }
   ]
 }

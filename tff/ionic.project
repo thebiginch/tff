@@ -11,8 +11,8 @@
       "proxyUrl": "http://127.0.0.1:1337/api/users"
     },
     {
-      "path": "/api/matches",
-      "proxyUrl": "http://127.0.0.1:1337/api/matches"
+      "path": "/api/users/matches",
+      "proxyUrl": "http://127.0.0.1:1337/api/users/matches"
     },
     {
       "path": "/login",

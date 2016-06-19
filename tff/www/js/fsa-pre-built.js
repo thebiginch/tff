@@ -88,6 +88,7 @@
 
         this.login = function (credentials) {
             return $http.post(config.apiUrl+'/login', credentials)
+
                 .then(onSuccessfulLogin)
                 .catch(function () {
                     return $q.reject({ message: 'Invalid login credentials.' });
@@ -96,6 +97,7 @@
 
         this.logout = function () {
             return $http.get(config.apiUrl+'/logout').then(function () {
+
                 Session.destroy();
                 $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
             });

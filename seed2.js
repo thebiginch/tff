@@ -34,9 +34,13 @@
 
       return function() {
 
-          if (i < 50) return ''+`/images/${i++}.jpg`
-          else if (i < 79) return ''+`/images/${i++}.png`
-          else return null;
+          if (i < 50) return ''+`/images/${i++}.jpg`;
+          else if (i < 79) return ''+`/images/${i++}.png`;
+          else if (i<100 && (i!=83 && i!=97) ) return ''+`/images/${i++}.jpg`
+          else { i++;
+              return null;
+          }
+
       }
   }
 
@@ -71,7 +75,7 @@
       var users = doTimes(numUsers, randUser);
       users.push(User.build({
           name: 'Zach',
-          image: genPicUrls(),
+          image: '/images/97.jpg',
           email: 'z@z.com',
           password: '123',
           isAdmin: true,
@@ -85,7 +89,7 @@
 
       users.push(User.build({
           name: 'Andrew',
-          image: genPicUrls(),
+          image: '/images/83.jpg',
           email: 'a@a.com',
           password: '123',
           isAdmin: true,

@@ -6,8 +6,10 @@
             </label>
             <ion-item class="item-divider " id="matchesTabDefaultPage-list-item-divider3">New Matches</ion-item>
             <ion-item ng-repeat="user in matchedUsers | filter: {name: search}" id="matchesTabDefaultPage-list-item10" class="  ">
-              <img ng-src="{{user.image}}"/>
-              {{user.name}} / {{user.weight}} lbs.
+              <div ng-click="openModal(user)">
+                <img ng-src="{{user.image}}"/>
+                {{user.name}} / {{user.weight}} lbs.
+              </div>
             </ion-item>
             <!-- <ion-item id="matchesTabDefaultPage-list-item10" class="  ">{{matchedUsers}}</ion-item>
             <ion-item id="matchesTabDefaultPage-list-item11" class="  ">Item 2</ion-item>
@@ -19,5 +21,22 @@
             <ion-item id="matchesTabDefaultPage-list-item14" class="  ">Item 2</ion-item>
             <ion-item id="matchesTabDefaultPage-list-item15" class="  ">Item 3</ion-item>
         </ion-list>
+
+        <script id="view-profile.html" type="text/ng-template">
+          <ion-modal-view class="modal-backdrop">
+            <ion-content>
+            <h1 class="match">Match Profile</h1><img ng-src="{{user.image}}"></img>
+            <br/>
+            Name: {{user.name}}
+            <br/>
+            Weight: {{user.weight}} lbs.
+            <br/>
+            Location: {{user.location}}
+            <br/>
+            <button class = "button" ng-click = "closeModal()">Hide</button>
+            </ion-content>
+          </ion-modal-view>
+        </script>
+
     </ion-content>
 </ion-view>

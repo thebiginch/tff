@@ -40,7 +40,7 @@ angular.module('app.controllers', ['app.factories', 'ionic', 'fsaPreBuilt', 'app
 
     $scope.cardDestroyed = function(index) {
         $scope.cards.splice(index, 1);
-        if ($scope.cards.length < 10) {
+        if ($scope.cards.length < 3) {
           $scope.appendNewCards()
         }
     };
@@ -57,10 +57,10 @@ angular.module('app.controllers', ['app.factories', 'ionic', 'fsaPreBuilt', 'app
             .then(function(match) {
                 $scope.match = match;
                 if (match.name) $scope.openModal()
-                if ($scope.cards.length === 0) {
-                  console.log('got here')
-                  $scope.getNewCards()
-                }
+                // if ($scope.cards.length === 0) {
+                //   console.log('got here')
+                //   $scope.getNewCards()
+                // }
             })
     }
 

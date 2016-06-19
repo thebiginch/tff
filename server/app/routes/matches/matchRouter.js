@@ -26,7 +26,7 @@ router.post('/', function(req, res, next) {
 
     var IR = !!req.body.IR;
     var promiseForUsers = Promise.all([theUser, thePerson]);
-    console.log(theUser)
+
     //Search for a match where user has already been challenged by person and the pair exists in the match table
     MatchMaking.findAll({
             where: { instId: req.body.personId, challId: req.user.id }
@@ -39,7 +39,7 @@ router.post('/', function(req, res, next) {
                 //create the match in the match table
                 return promiseForUsers.then(function(users) {
 
-                        console.log("useerrrr", users)
+                        // console.log("useerrrr", users)
 
                         //user is inst  and other person is chall  and send users response
                         return users[0].addInst(users[1], { IR: IR });

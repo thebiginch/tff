@@ -163,3 +163,14 @@ gulp.task('default', function () {
     livereload.listen();
 
 });
+
+gulp.task('rename',function(){
+    var i = 50;
+    gulp.src('./public/images/userpics/*.png')
+        .pipe(rename(function(path){
+            path.basename = `${i++}`;
+            path.extname = ".png";
+        }))
+        .pipe(gulp.dest('./public/images/rr/'))
+})
+

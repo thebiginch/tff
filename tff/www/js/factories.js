@@ -8,10 +8,10 @@ angular.module('app.factories', ['ionic','app.services'])
     cardSwipedRight: function(otherPerson) {
       return $http.post(config.apiUrl+'/api/matches',{personId: otherPerson.id, IR: true})
       .then((resp) => resp.data)
-      // .then((data) => )
     },
     cardSwipedLeft: function(otherPerson) {
-      return $http.post(config.apiUrl+'/api/matches',{personId: otherPerson.id, IR: false}).then((resp) => resp.data)
+      return $http.post(config.apiUrl+'/api/matches',{personId: otherPerson.id, IR: false})
+      .then((resp) => resp.data)
     },
 
   }

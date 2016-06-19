@@ -19,27 +19,27 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
 
-    console.log(req.body)
+    // console.log(req.body)
 
     var theUser = User.findById(parseInt(req.user.id));
     var thePerson = User.findById(parseInt(req.body.personId));
 
     var IR = !!req.body.IR;
     var promiseForUsers = Promise.all([theUser, thePerson]);
-
+    console.log(theUser)
     //Search for a match where user has already been challenged by person and the pair exists in the match table
     MatchMaking.findAll({
             where: { instId: req.body.personId, challId: req.user.id }
         })
         .then(function(match) {
+
             //then if the match doesn't exists
-            if (match.length == 0) {
+            if (match.length === 0) {
 
                 //create the match in the match table
                 return promiseForUsers.then(function(users) {
 
-                        // console.log("useerrrr", users[0])
-                        // console.log("useerrrr", users[1])
+                        console.log("useerrrr", users)
 
                         //user is inst  and other person is chall  and send users response
                         return users[0].addInst(users[1], { IR: IR });
@@ -63,11 +63,11 @@ router.post('/', function(req, res, next) {
 
                 //the match exists in database but fight hasnt been confirmed by user or person
             } else {
-
+              console.log('got here!')
             	promiseForUsers.then(users => {
-                	users[0].addChall(users[1], { CR: IR });
+                	return users[0].addChall(users[1], { CR: IR });
                 })
-                .tap(users => {
+                .then(users => {
                 	res.status(201).send(users[1]);
                 })
                 .catch(next);

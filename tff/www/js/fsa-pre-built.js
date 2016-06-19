@@ -5,7 +5,7 @@
     // Hope you didn't forget Angular! Duh-doy.
     if (!window.angular) throw new Error('I can\'t find Angular!');
 
-    var app = angular.module('fsaPreBuilt', []);
+    var app = angular.module('fsaPreBuilt', ['app.services']);
 
     app.factory('Socket', function () {
         if (!window.io) throw new Error('socket.io not found!');
@@ -48,7 +48,7 @@
         ]);
     });
 
-    app.service('AuthService', function ($http, Session, $rootScope, AUTH_EVENTS, $q) {
+    app.service('AuthService', function ($http, Session, $rootScope, AUTH_EVENTS, $q, config) {
 
         function onSuccessfulLogin(response) {
             var data = response.data;
@@ -80,14 +80,15 @@
             // Make request GET /session.
             // If it returns a user, call onSuccessfulLogin with the response.
             // If it returns a 401 response, we catch it and instead resolve to null.
-            return $http.get('http://192.168.3.223:1337/session').then(onSuccessfulLogin).catch(function () {
+            return $http.get(config.apiUrl+'/session').then(onSuccessfulLogin).catch(function () {
                 return null;
             });
 
         };
 
         this.login = function (credentials) {
-            return $http.post('http://192.168.3.223:1337/login', credentials)
+            return $http.post(config.apiUrl+'/login', credentials)
+
                 .then(onSuccessfulLogin)
                 .catch(function () {
                     return $q.reject({ message: 'Invalid login credentials.' });
@@ -95,7 +96,8 @@
         };
 
         this.logout = function () {
-            return $http.get('http://192.168.3.223:1337/logout').then(function () {
+            return $http.get(config.apiUrl+'/logout').then(function () {
+
                 Session.destroy();
                 $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
             });

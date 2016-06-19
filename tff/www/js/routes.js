@@ -1,6 +1,6 @@
-angular.module('app.routes', [])
+angular.module('app.routes', ['app.services'])
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, config) {
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -35,7 +35,7 @@ angular.module('app.routes', [])
                    controller: 'matchesTabDefaultPageCtrl',
                    resolve: {
                      matchedUsers: function($http) {
-                       return $http.get('/api/users/matches')
+                       return $http.get(config.apiUrl+'/api/users/matches')
                        .then(matches => matches.data)
                        }
                      }

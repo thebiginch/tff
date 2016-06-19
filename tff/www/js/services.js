@@ -1,10 +1,9 @@
 angular.module('app.services', [])
 
-.factory('BlankFactory', [function(){
-
-}])
+.constant('config',{
+  apiUrl: ''
+})
 
 .service('BlankService', [function(){
 
 }]);
-

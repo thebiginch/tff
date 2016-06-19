@@ -6,6 +6,10 @@ angular.module('app.controllers', ['app.factories', 'ionic', 'fsaPreBuilt', 'app
         fightFactory.getNewCards().then(cards => $scope.cards = cards)
     }
 
+    $scope.appendNewCards = function() {
+      fightFactory.getNewCards().then(cards => $scope.cards = cards.concat($scope.cards))
+    }
+
     $scope.getNewCards()
 
     $scope.cards = [];
@@ -36,6 +40,9 @@ angular.module('app.controllers', ['app.factories', 'ionic', 'fsaPreBuilt', 'app
 
     $scope.cardDestroyed = function(index) {
         $scope.cards.splice(index, 1);
+        if ($scope.cards.length < 10) {
+          $scope.appendNewCards()
+        }
     };
 
     $scope.cardSwiped = function(index) {
@@ -45,12 +52,15 @@ angular.module('app.controllers', ['app.factories', 'ionic', 'fsaPreBuilt', 'app
 
     $scope.cardSwipedLeft = fightFactory.cardSwipedLeft
 
-
     $scope.cardSwipedRight = function(otherPerson) {
         fightFactory.cardSwipedRight(otherPerson)
             .then(function(match) {
                 $scope.match = match;
                 if (match.name) $scope.openModal()
+                if ($scope.cards.length === 0) {
+                  console.log('got here')
+                  $scope.getNewCards()
+                }
             })
     }
 

@@ -31,6 +31,15 @@
     -moz-transform: translate3d(0, 0, 0) !important;
     transform: translate3d(0, 0, 0) !important;
   }
+  span {
+    background: #007AFF !important;
+    display: inline-block !important;
+    color: white !important;
+    padding: 10px !important;
+    border-radius: 10px !important;
+    text-align: left !important;
+    max-width: 240px !important;
+  }
 }
 .time {
   -webkit-box-flex: 0 !important;
@@ -72,13 +81,4 @@
     color: black !important;
     background-color: #C7C7CC !important;
   }
-}
-span {
-  background: #007AFF !important;
-  display: inline-block !important;
-  color: white !important;
-  padding: 10px !important;
-  border-radius: 10px !important;
-  text-align: left !important;
-  max-width: 240px !important;
 }

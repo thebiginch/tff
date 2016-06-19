@@ -51,7 +51,11 @@ angular.module('app.routes', ['app.services'])
                },
            }
        })
-
+       .state('chatTabDefaultPage', {
+           url: '/page6',
+           templateUrl: 'templates/chatTabDefaultPage.html',
+           controller: 'chatTabDefaultPageCtrl'
+       })
        $urlRouterProvider.otherwise('/page1')
 
 

@@ -17,9 +17,12 @@
             <ion-item class="item-divider " id="matchesTabDefaultPage-list-item-divider4">Messages</ion-item>
         </ion-list>
         <ion-list id="matchesTabDefaultPage-list5" class=" ">
-            <ion-item id="matchesTabDefaultPage-list-item13" class="  ">Item 1</ion-item>
-            <ion-item id="matchesTabDefaultPage-list-item14" class="  ">Item 2</ion-item>
-            <ion-item id="matchesTabDefaultPage-list-item15" class="  ">Item 3</ion-item>
+            <ion-item ng-repeat="chat in chats" id="matchesTabDefaultPage-list-item13" class="  ">
+              <div ng-click="goToChat(user)">
+                <img ng-src="{{chat.image}}"/>
+                {{chat.name}} / {{chat.weight}} lbs.
+              </div>
+            </ion-item>
         </ion-list>
 
         <script id="view-profile.html" type="text/ng-template">
@@ -33,6 +36,7 @@
             <br/>
             Location: {{user.location}}
             <br/>
+            <button class = "button" ng-click = "newChat(user)">Start Chat</button>
             <button class = "button" ng-click = "closeModal()">Hide</button>
             </ion-content>
           </ion-modal-view>

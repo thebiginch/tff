@@ -94,6 +94,7 @@ angular.module('app.controllers', ['app.factories', 'ionic', 'fsaPreBuilt', 'app
 
 .controller('chatTabDefaultPageCtrl', function($scope) {
 
+
 })
 
 .controller('settingsTabDefaultPageCtrl', function($scope, $state, AuthService, $localStorage,config) {
@@ -168,8 +169,19 @@ angular.module('app.controllers', ['app.factories', 'ionic', 'fsaPreBuilt', 'app
 
 })
 
-.controller('matchesTabDefaultPageCtrl', function($scope, matchedUsers, $ionicModal) {
+.controller('matchesTabDefaultPageCtrl', function($scope, matchedUsers, $ionicModal, $state) {
   $scope.matchedUsers = matchedUsers
+
+  $scope.newChat = function(user) {
+    $scope.chats.unshift(user)
+    $scope.modal.hide()
+  }
+
+  $scope.goToChat = function(user) {
+    $state.go('chatTabDefaultPage')
+  }
+
+  $scope.chats = [];
 
   //Profile view Popup
   $ionicModal.fromTemplateUrl('view-profile.html', {

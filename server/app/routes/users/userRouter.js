@@ -15,7 +15,7 @@ var ensureAuthenticated = function (req, res, next) {
 
 router.get('/challengers', function(req, res, next) {
 
-	var dataLimit = 30
+	var dataLimit = 20
 	var matches = []
 	var theUsers = []
 	req.user.getChall()

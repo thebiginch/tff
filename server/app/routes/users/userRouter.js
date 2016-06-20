@@ -21,6 +21,7 @@ router.get('/challengers', function(req, res, next) {
 	req.user.getChall()
 	.then(users => {
 		matches = users.map((user) => user.id)
+		matches.push(req.user.id)
 		theUsers = users.filter((user) => user.matchMaking.CR === null)
 		dataLimit -= theUsers.length
 	})

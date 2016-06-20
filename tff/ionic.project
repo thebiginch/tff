@@ -25,6 +25,14 @@
     {
       "path": "/session",
       "proxyUrl": "http://127.0.0.1:1337/session"
+    },
+    {
+      "path": "/images",
+      "proxyUrl": "http://127.0.0.1:1337/images"
+    },
+    {
+      "path": "/api/matches",
+      "proxyUrl": "http://127.0.0.1:1337/api/matches"
     }
   ]
 }

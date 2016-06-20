@@ -17,6 +17,11 @@ var karma = require('karma').server;
 var istanbul = require('gulp-istanbul');
 var notify = require('gulp-notify');
 
+// gulp-image-resize gulp-imagemin imagemin-pngquant
+var imageresize = require('gulp-image-resize');
+var imagemin = require('gulp-imagemin');
+var pngquant = require('imagemin-pngquant');
+
 // Development tasks
 // --------------------------------------------------------------
 
@@ -163,3 +168,76 @@ gulp.task('default', function () {
     livereload.listen();
 
 });
+
+gulp.task('rename',function(){
+    var i = 70;
+    gulp.src('./public/images/userpics/*.png')
+        .pipe(rename(function(path){
+            path.basename = `${i++}`;
+            path.extname = ".png";
+        }))
+        .pipe(gulp.dest('./public/images/rr/'))
+})
+
+
+
+ 
+// set the folder name and the relative paths
+// in the example the images are in ./assets/images
+// and the public directory is ../public
+var paths = {
+    folder: '',
+    src: './public', 
+    dest: './public'
+}
+
+// create an array of image groups (see comments above)
+// specifying the folder name, the ouput dimensions and
+// whether or not to crop the images
+var images = [
+    { folder: 'fs', width: 200, height: 200, crop: true }
+];
+
+// images gulp task
+gulp.task('images', function () {
+    var i = 70;
+    // loop through image groups        
+    images.forEach(function(type){
+        
+        // build the resize object
+        var resize_settings = {
+            width: type.width,
+            crop: type.crop,
+            // never increase image dimensions
+            upscale : false
+        }
+        // only specify the height if it exists
+        if (type.hasOwnProperty("height")) {
+            resize_settings.height = type.height
+        }
+        
+        gulp
+        
+        // grab all images from the folder
+        .src('./public/fs/*.jpg')
+    
+        // resize them according to the width/height settings
+        .pipe(imageresize(resize_settings))
+        
+        // optimize the images
+        .pipe(imagemin({
+            progressive: true,
+            // set this if you are using svg images
+            svgoPlugins: [{removeViewBox: false}],
+            use: [pngquant()]
+        }))
+        .pipe(rename(function(path){
+            path.basename = `${i++}`;
+            path.extname = ".jpg";
+        }))        
+        // output each image to the dest path
+        // maintaining the folder structure
+        .pipe(gulp.dest('./public/images2'));
+    });
+});
+

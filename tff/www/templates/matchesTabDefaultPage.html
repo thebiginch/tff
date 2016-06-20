@@ -8,7 +8,7 @@
             <ion-item ng-repeat="user in matchedUsers | filter: {name: search}" id="matchesTabDefaultPage-list-item10" class="  ">
               <div ng-click="openModal(user)">
                 <img ng-src="{{user.image}}"/>
-                {{user.name}} / {{user.weight}} lbs.
+                {{user.name}}
               </div>
             </ion-item>
             <!-- <ion-item id="matchesTabDefaultPage-list-item10" class="  ">{{matchedUsers}}</ion-item>
@@ -20,7 +20,7 @@
             <ion-item ng-repeat="chat in chats" id="matchesTabDefaultPage-list-item13" class="  ">
               <div ng-click="goToChat(user)">
                 <img ng-src="{{chat.image}}"/>
-                {{chat.name}} / {{chat.weight}} lbs.
+                {{chat.name}}
               </div>
             </ion-item>
         </ion-list>
@@ -31,6 +31,8 @@
             <h1 class="match">Match Profile</h1><img ng-src="{{user.image}}"></img>
             <br/>
             Name: {{user.name}}
+            <br/>
+            Age: {{user.age}}
             <br/>
             Weight: {{user.weight}} lbs.
             <br/>

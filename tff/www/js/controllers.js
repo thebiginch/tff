@@ -13,7 +13,7 @@ angular.module('app.controllers', ['app.factories', 'ionic', 'fsaPreBuilt', 'app
     $scope.getNewCards()
 
     $scope.cards = [];
-
+    
     // $scope.cards = [{
     //   name: 'Zach',
     //   image: 'https://randomuser.me/api/portraits/men/90.jpg',
